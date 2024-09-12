@@ -2,7 +2,7 @@ version: '3'
 services:
   # MongoDB service
   mongo:
-    image: mongo:latest
+    image: mongo:7.0.14
     container_name: mock_mongo
     ports:
       - "27017:27017"
