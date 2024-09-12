@@ -1,0 +1,26 @@
+version: '3'
+services:
+  # MongoDB service
+  mongo:
+    image: mongo:latest
+    container_name: mock_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # Express.js service
+  app:
+    build: .
+    container_name: mock_express_app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mock-db
+    command: "npm start"
+
+volumes:
+  mongo-data:
+    driver: local
