@@ -1,5 +1,6 @@
 import express from 'express';
 import Mock from './mockModel.js';  // Import the Mock model
+import { db } from './server.js'
 
 const router = express.Router();
 
@@ -37,6 +38,24 @@ router.post('/mock', async (req, res) => {
   } catch (error) {
     console.error('Error creating mock:', error);
     res.status(500).json({ message: 'Error creating mock' });
+  }
+});
+
+router.delete('/mock/:id', async (req, res) => {
+  const mockId = req.params.id;
+
+  try {
+    // Find and delete the mock API from MongoDB
+    const result = await db.collection('mocks').deleteOne({ _id: ObjectId(mockId) });
+
+    if (result.deletedCount === 1) {
+      return res.status(200).json({ message: 'Mock API deleted successfully.' });
+    } else {
+      return res.status(404).json({ message: 'Mock API not found.' });
+    }
+  } catch (error) {
+    console.error('Error deleting mock API:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
   }
 });
 

@@ -5,10 +5,10 @@
     "description": "A dockerized Express.js mock server with MongoDB",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
     },
     "dependencies": {
-      "express": "^4.17.1",
-      "mongoose": "^6.0.12"
+        "express": "^4.17.1",
+        "mongoose": "^6.0.12"
     }
-  }
+}
